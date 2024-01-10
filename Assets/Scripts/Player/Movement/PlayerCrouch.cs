@@ -10,7 +10,7 @@ public class PlayerCrouch : MonoBehaviour
 	[SerializeField, Min(0.5f)] private float _crouchHeight = 1f;
 	[SerializeField, Min(0.5f)] private float _standHeight = 1.8f;
 	[SerializeField, Range(0.1f, 10)] private float _crouchSpeed = 1f;
-	[SerializeField, Min(0)] private float _cameraOffset = 0.15f;
+	[field:SerializeField, Min(0)] public float CameraOffset { get; private set; } = 0.15f;
 
 	[Header("Components")]
     [SerializeField] private CharacterController _characterController;
@@ -81,7 +81,7 @@ public class PlayerCrouch : MonoBehaviour
 	{
 		_characterController.height = height;
 		_characterController.center = Vector3.up / 2 * height;
-		_viewTransform.localPosition = Vector3.up * (height - _cameraOffset);
+		_viewTransform.localPosition = Vector3.up * (height - CameraOffset);
 	}
 
 #if UNITY_EDITOR
@@ -104,8 +104,8 @@ public class PlayerCrouch : MonoBehaviour
 		if (_crouchHeight < _characterController.radius * 2)
 			_crouchHeight = _characterController.radius * 2;
 
-        if (_cameraOffset > _crouchHeight)
-			_cameraOffset = _crouchHeight;
+        if (CameraOffset > _crouchHeight)
+			CameraOffset = _crouchHeight;
     }
 
 #endif
