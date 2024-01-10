@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 671533006}
   - component: {fileID: 671533008}
   - component: {fileID: 671533009}
+  - component: {fileID: 671533010}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -607,6 +608,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <CharacterController>k__BackingField: {fileID: 671533006}
+  <CharacterControllerGravity>k__BackingField: {fileID: 671533009}
   <PlayerCrouch>k__BackingField: {fileID: 671533008}
   <PlayerView>k__BackingField: {fileID: 459570212}
 --- !u!114 &671533008
@@ -642,6 +644,21 @@ MonoBehaviour:
   _gravityScale: 1
   _minVerticalVelocity: -50
   _characterController: {fileID: 671533006}
+--- !u!114 &671533010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671533004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbc05cac16aee8489d62addf7e19960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpHeight: 1
+  _maxJumps: 3
+  _gravityController: {fileID: 671533009}
 --- !u!1 &1420960750
 GameObject:
   m_ObjectHideFlags: 0

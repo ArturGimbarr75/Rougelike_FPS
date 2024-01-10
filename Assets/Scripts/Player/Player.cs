@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(CharacterControllerGravity))]
+[RequireComponent(typeof(PlayerJump))]
 [RequireComponent(typeof(PlayerCrouch))]
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
 	[field:Header("Components")]
     [field:SerializeField] public CharacterController CharacterController { get; private set; }
 	[field:SerializeField] public CharacterControllerGravity CharacterControllerGravity { get; private set; }
+	[field:SerializeField] public PlayerJump PlayerJump { get; private set; }
 	[field:SerializeField] public PlayerCrouch PlayerCrouch { get; private set; }
 	[field:SerializeField] public PlayerView PlayerView { get; private set; }
 
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
 	{
 		CharacterController ??= GetComponent<CharacterController>();
 		CharacterControllerGravity ??= GetComponent<CharacterControllerGravity>();
+		PlayerJump ??= GetComponent<PlayerJump>();
 		PlayerCrouch ??= GetComponent<PlayerCrouch>();
 		PlayerView ??= GetComponentInChildren<PlayerView>();
 	}
