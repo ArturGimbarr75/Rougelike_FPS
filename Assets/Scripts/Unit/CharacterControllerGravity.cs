@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -6,6 +7,9 @@ public class CharacterControllerGravity : MonoBehaviour
     public float VerticalVelocity { get; private set; } = 0f;
     public bool IsGrounded { get; private set; } = false;
 
+    public event EventHandler<LandEventArgs> Land;
+    public event EventHandler<FallEventArgs> StartedFall;
+
     [Header("Params")]
     [SerializeField] private float _gravityScale = 1f;
     [SerializeField] private float _minVerticalVelocity = -10f;
@@ -13,19 +17,33 @@ public class CharacterControllerGravity : MonoBehaviour
     [Header("Components")]
     [SerializeField] private CharacterController _characterController;
 
-    private void FixedUpdate()
+    private Vector3 _fallStartPos;
+
+	private void Start()
+	{
+		_fallStartPos = transform.position;
+	}
+
+	private void FixedUpdate()
     {
 		CollisionFlags collision = _characterController.Move(Vector3.up * VerticalVelocity * Time.fixedDeltaTime);
-        IsGrounded = collision.HasFlag(CollisionFlags.Below);
+        bool isGrounded = collision.HasFlag(CollisionFlags.Below);
+
+        if (!isGrounded && IsGrounded)
+        {
+            IsGrounded = false;
+            _fallStartPos = transform.position;
+            StartedFall?.Invoke(this, new(_fallStartPos));
+        }
+        else if (isGrounded && !IsGrounded)
+        {
+            IsGrounded = true;
+            Land?.Invoke(this, new(VerticalVelocity, _fallStartPos, transform.position));
+            VerticalVelocity = 0f;
+        }
 
 		VerticalVelocity += Physics.gravity.y * _gravityScale * Time.fixedDeltaTime;
         VerticalVelocity = Mathf.Max(VerticalVelocity, _minVerticalVelocity);
-
-        if (IsGrounded)
-        {
-            VerticalVelocity = 0f;
-            transform.position = new Vector3(transform.position.x, _characterController.bounds.extents.y, transform.position.z);
-        }
     }
 
     public void AddVelocity(float velocity)
