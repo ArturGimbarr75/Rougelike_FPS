@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterControllerGravity))]
 public class PlayerCrouch : MonoBehaviour
 {
 	public bool IsCrouched { get; private set; }
@@ -14,6 +15,7 @@ public class PlayerCrouch : MonoBehaviour
 
 	[Header("Components")]
     [SerializeField] private CharacterController _characterController;
+	[SerializeField] private CharacterControllerGravity _gravity;
 	[SerializeField] private Transform _viewTransform;
 
 	private float _currentHeight = 0f;
@@ -29,7 +31,7 @@ public class PlayerCrouch : MonoBehaviour
 	{
 		bool isCrouchPressed = Input.GetKey(KeyCode.LeftControl);
 
-		if (isCrouchPressed)
+		if (isCrouchPressed && _gravity.IsGrounded)
 		{
 			IsCrouched = true;
 
@@ -48,7 +50,7 @@ public class PlayerCrouch : MonoBehaviour
 				return;
 			}
 
-			if (IsHeadBlocked())
+			if (!IsHeadBlocked())
 			{
 				_currentHeight += _crouchSpeed * Time.deltaTime;
 				_currentHeight = Mathf.Min(_currentHeight, _standHeight);
@@ -90,6 +92,7 @@ public class PlayerCrouch : MonoBehaviour
 	private void TryGetComponents()
 	{
 		_characterController ??= GetComponent<CharacterController>();
+		_gravity ??= GetComponent<CharacterControllerGravity>();
 		_viewTransform ??= GetComponentInChildren<PlayerView>()?.transform;
 	}
 
