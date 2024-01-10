@@ -35,10 +35,11 @@ public class CharacterControllerGravity : MonoBehaviour
             _fallStartPos = transform.position;
             StartedFall?.Invoke(this, new(_fallStartPos));
         }
-        else if (isGrounded && !IsGrounded)
+        else if (isGrounded)
         {
+            if (!IsGrounded)
+                Land?.Invoke(this, new(VerticalVelocity, _fallStartPos, transform.position));
             IsGrounded = true;
-            Land?.Invoke(this, new(VerticalVelocity, _fallStartPos, transform.position));
             VerticalVelocity = 0f;
         }
 
