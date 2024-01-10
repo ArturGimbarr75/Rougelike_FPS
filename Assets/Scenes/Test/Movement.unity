@@ -222,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 326149424}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 0, y: 1.75, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 671533007}
   - component: {fileID: 671533006}
   - component: {fileID: 671533008}
+  - component: {fileID: 671533009}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -626,6 +627,21 @@ MonoBehaviour:
   _cameraOffset: 0.15
   _characterController: {fileID: 671533006}
   _viewTransform: {fileID: 459570211}
+--- !u!114 &671533009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671533004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a94197d2c34b54abc3f68dbf9e8d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravityScale: 1
+  _minVerticalVelocity: -50
+  _characterController: {fileID: 671533006}
 --- !u!1 &1420960750
 GameObject:
   m_ObjectHideFlags: 0
