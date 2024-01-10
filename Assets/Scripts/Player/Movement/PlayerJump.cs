@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterControllerGravity))]
 public class PlayerJump : MonoBehaviour
 {
-    [SerializeField, Min(0.5f)] private float _jumpHeight = 1.0f;
+	[Header("Params")]
+	[SerializeField, Min(0.5f)] private float _jumpHeight = 1.0f;
     [SerializeField, Min(1)] private int _maxJumps = 3;
 
 	[Header("Components")]
