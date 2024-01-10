@@ -10,8 +10,9 @@ public class PlayerCrouch : MonoBehaviour
 	[Header("Params")]
 	[SerializeField, Min(0.5f)] private float _crouchHeight = 1f;
 	[SerializeField, Min(0.5f)] private float _standHeight = 1.8f;
-	[SerializeField, Range(0.1f, 10)] private float _crouchSpeed = 1f;
-	[field:SerializeField, Min(0)] public float CameraOffset { get; private set; } = 0.15f;
+	[SerializeField, Range(0.1f, 10f)] private float _crouchSpeed = 5f;
+	[field:SerializeField, Min(0f)] public float CameraOffset { get; private set; } = 0.15f;
+	[SerializeField, Range(0, 1f)] private float _headBlockedCheckDistance = 0.1f;
 
 	[Header("Components")]
     [SerializeField] private CharacterController _characterController;
@@ -65,7 +66,7 @@ public class PlayerCrouch : MonoBehaviour
 		RaycastHit[] hits = Physics.SphereCastAll(castCenter,
 													_characterController.radius,
 													Vector3.up,
-													0, // no distance
+													_headBlockedCheckDistance,
 													~_playerLayerMask, // cast all layers except player layer
 													QueryTriggerInteraction.Ignore);
 

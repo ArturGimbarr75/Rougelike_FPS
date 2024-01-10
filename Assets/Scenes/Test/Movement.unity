@@ -617,6 +617,7 @@ MonoBehaviour:
   _standHeight: 1.8
   _crouchSpeed: 3
   <CameraOffset>k__BackingField: 0.15
+  _headBlockedCheckDistance: 0.1
   _characterController: {fileID: 671533006}
   _gravity: {fileID: 671533009}
   _viewTransform: {fileID: 459570211}
