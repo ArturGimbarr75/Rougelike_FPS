@@ -665,7 +665,7 @@ MonoBehaviour:
   _walkSpeed: 5
   _runSpeed: 10
   _crouchSpeed: 2
-  _nonGroundedAcceleration: 10
+  _nonGroundedAcceleration: 5
   _characterController: {fileID: 671533006}
   _gravity: {fileID: 671533009}
   _crouch: {fileID: 671533008}

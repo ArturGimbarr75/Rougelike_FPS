@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float _walkSpeed = 5f;
 	[SerializeField] private float _runSpeed = 10f;
 	[SerializeField] private float _crouchSpeed = 2f;
-	[SerializeField] private float _nonGroundedAcceleration = 10f;
+	[SerializeField] private float _nonGroundedAcceleration = 5f;
 
     [field:Header("Components")]
     [field:SerializeField] private CharacterController _characterController;
@@ -44,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
 			_lastHorizontalVelocity += horizontalVelocity * _nonGroundedAcceleration * Time.deltaTime;
 		}
 
-		_characterController.Move(_lastHorizontalVelocity * Time.deltaTime);
+		CollisionFlags collision = _characterController.Move(_lastHorizontalVelocity * Time.deltaTime);
+
+		if (collision.HasFlag(CollisionFlags.Sides))
+			_lastHorizontalVelocity = Vector3.zero;
 	}
 
 #if UNITY_EDITOR
