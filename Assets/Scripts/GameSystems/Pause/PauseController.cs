@@ -6,10 +6,10 @@ public class PauseController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PauseManager.IsPaused)
-				PauseManager.Unpause();
+            if (PauseSystem.IsPaused)
+				PauseSystem.Unpause();
 			else
-				PauseManager.Pause();
+				PauseSystem.Pause();
 		}
     }
 }

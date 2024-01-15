@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class PauseManager
+public static class PauseSystem
 {
     public static bool IsPaused { get; private set; } = false;
 
