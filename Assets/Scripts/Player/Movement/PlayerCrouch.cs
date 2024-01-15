@@ -30,6 +30,9 @@ public class PlayerCrouch : MonoBehaviour
 
 	private void Update()
 	{
+		if (PauseSystem.IsPaused)
+			return;
+
 		bool isCrouchPressed = Input.GetKey(KeyCode.LeftControl);
 
 		if (isCrouchPressed && _gravity.IsGrounded)

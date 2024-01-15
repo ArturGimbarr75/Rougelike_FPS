@@ -33,6 +33,9 @@ public class PlayerJump : MonoBehaviour
 
 	private void Update()
 	{
+		if (PauseSystem.IsPaused)
+			return;
+
 		if (Input.GetKeyDown(KeyCode.Space) && _leftJumps --> 0)
 		{
 			_gravityController.SetVelocity(_jumpVelocity);
