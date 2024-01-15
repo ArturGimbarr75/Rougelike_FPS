@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		if (PauseSystem.IsPaused)
+			return;
+
 		Vector3 horizontalVelocity = new (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		horizontalVelocity = transform.TransformDirection(horizontalVelocity);
 

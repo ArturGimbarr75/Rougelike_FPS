@@ -20,6 +20,9 @@ public class PlayerView : MonoBehaviour
 
 	private void Update()
 	{
+		if (PauseSystem.IsPaused)
+			return;
+
 		Vector2 viewDelta = new (Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
 		_player.Rotate(Vector3.up * (viewDelta.x * _sensitivity) * (_horizontalInvertion? -1 : 1));
