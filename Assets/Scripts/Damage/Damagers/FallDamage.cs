@@ -31,4 +31,15 @@ public class FallDamage : MonoBehaviour
         };
         _damageProvider.ApplyDamage(damage);
 	}
+
+#if UNITY_EDITOR
+
+    [ContextMenu(nameof(TryGetComponents))]
+    private void TryGetComponents()
+    {
+        _gravity ??= GetComponent<CharacterControllerGravity>();
+		_damageProvider ??= GetComponent<GeneralDamageProvider>();
+    }
+
+#endif
 }
