@@ -814,6 +814,9 @@ GameObject:
   - component: {fileID: 1173464085}
   - component: {fileID: 1173464084}
   - component: {fileID: 1173464083}
+  - component: {fileID: 1173464090}
+  - component: {fileID: 1173464092}
+  - component: {fileID: 1173464091}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -954,6 +957,49 @@ Transform:
   - {fileID: 1215505851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1173464090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173464082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1751ddfd2a5dbcc49835c521d7063585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Current>k__BackingField: 100
+  <Max>k__BackingField: 100
+--- !u!114 &1173464091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173464082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d03535ad1beb764087dad19c68197b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagePerVelocity: 3
+  _minVelocity: 12
+  _gravity: {fileID: 1173464085}
+  _damageProvider: {fileID: 1173464092}
+--- !u!114 &1173464092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173464082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6485d3d9271dc24aae91cf61208abed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Health>k__BackingField: {fileID: 1173464090}
 --- !u!1 &1215505850
 GameObject:
   m_ObjectHideFlags: 0
