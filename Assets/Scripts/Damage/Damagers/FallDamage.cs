@@ -25,11 +25,7 @@ public class FallDamage : MonoBehaviour
 			return;
 
         float damageValue = (velocity - _minVelocity) * _damagePerVelocity;
-        Damage damage = new()
-        {
-            Type = DamageType.Fall,
-            Value = damageValue
-        };
+        Damage damage = new(damageValue, DamageType.Fall);
         _damageProvider.ApplyDamage(damage);
 	}
 
