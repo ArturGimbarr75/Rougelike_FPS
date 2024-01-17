@@ -20,11 +20,12 @@ public class FallDamage : MonoBehaviour
 
 	private void OnLand(object sender, LandEventArgs args)
     {
-		if (args.Velocity < _minVelocity)
+        float velocity = Mathf.Abs(args.Velocity);
+		if (velocity < _minVelocity)
 			return;
 
-        float damageValue = (args.Velocity - _minVelocity) * _damagePerVelocity;
-        Damage damage = new ()
+        float damageValue = (velocity - _minVelocity) * _damagePerVelocity;
+        Damage damage = new()
         {
             Type = DamageType.Fall,
             Value = damageValue
