@@ -2,6 +2,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(CharacterControllerGravity))]
+[RequireComponent(typeof(GeneralDamageProvider))]
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(PlayerCrouch))]
 [RequireComponent(typeof(PlayerJump))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
 	[field:Header("Components")]
     [field:SerializeField] public CharacterController CharacterController { get; private set; }
 	[field:SerializeField] public CharacterControllerGravity GravityController { get; private set; }
+	[field:SerializeField] public GeneralDamageProvider DamageProvider { get; private set; }
+	[field:SerializeField] public Health Health { get; private set; }
 	[field:SerializeField] public PlayerCrouch Crouch { get; private set; }
 	[field:SerializeField] public PlayerJump Jump { get; private set; }
 	[field:SerializeField] public PlayerMovement Movement { get; private set; }
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
 	{
 		CharacterController ??= GetComponent<CharacterController>();
 		GravityController ??= GetComponent<CharacterControllerGravity>();
+		DamageProvider ??= GetComponent<GeneralDamageProvider>();
+		Health ??= GetComponent<Health>();
 		Crouch ??= GetComponent<PlayerCrouch>();
 		Jump ??= GetComponent<PlayerJump>();
 		Movement ??= GetComponent<PlayerMovement>();
