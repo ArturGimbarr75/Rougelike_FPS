@@ -4,9 +4,9 @@ public class GeneralDamageProvider : MonoBehaviour
 {
     [field:SerializeField] public Health Health { get; private set; }
     
-    public void ApplyDamage(Damage damage)
+    public void ApplyDamage(Damage damage, Transform hitter)
     {
-		Health.ApplyDamage(CalculateDamage(damage));
+		Health.ApplyDamage(CalculateDamage(damage), hitter);
 	}
 
     protected virtual float CalculateDamage(params Damage[] damage)

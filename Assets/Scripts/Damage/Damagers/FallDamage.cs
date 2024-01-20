@@ -26,7 +26,7 @@ public class FallDamage : MonoBehaviour
 
         float damageValue = (velocity - _minVelocity) * _damagePerVelocity;
         Damage damage = new(damageValue, DamageType.Fall);
-        _damageProvider.ApplyDamage(damage);
+        _damageProvider.ApplyDamage(damage, null);
 	}
 
 #if UNITY_EDITOR

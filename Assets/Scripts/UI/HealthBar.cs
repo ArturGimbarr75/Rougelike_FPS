@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
 
 	private void Start()
 	{
-		UpdateHealthBar(this, new HealthChangedEventArgs(0, _health));
+		UpdateHealthBar(this, new HealthChangedEventArgs(0, _health, null));
 	}
 
 	private void OnEnable()

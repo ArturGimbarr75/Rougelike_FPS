@@ -29,6 +29,6 @@ public class DamageZone : MonoBehaviour
 
 		Damage damage = new(_damagePerSecond * Time.deltaTime, _damageType);
 		foreach (var damageProvider in _damageProviders)
-			damageProvider.ApplyDamage(damage);
+			damageProvider.ApplyDamage(damage, null);
 	}
 }

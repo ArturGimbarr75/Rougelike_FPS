@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Health : MonoBehaviour
 {
@@ -16,14 +17,14 @@ public class Health : MonoBehaviour
     public event Action HealthEnd;
 	public event EventHandler<HealthChangedEventArgs> MaxChanged;
 
-    public float ApplyDamage(float damage)
+    public float ApplyDamage(float damage, Transform hitter)
     {
         if (damage <= 0)
             return 0;
 
 		float delta = Math.Min(Current, damage);
 		Current -= delta;
-        HealthChangedEventArgs args = new (-delta, this);
+        HealthChangedEventArgs args = new (-delta, this, hitter);
 		HealthChanged?.Invoke(this, args);
         HealthReduced?.Invoke(this, args);
 
@@ -39,8 +40,8 @@ public class Health : MonoBehaviour
 			return 0;
 
         float delta = Math.Min(Max - Current, heal);
-        Current += delta;
-        HealthChangedEventArgs args = new (delta, this);
+		Current += delta;
+        HealthChangedEventArgs args = new (delta, this, null);
         HealthChanged?.Invoke(this, args);
         HealthIncreased?.Invoke(this, args);
 
@@ -57,7 +58,7 @@ public class Health : MonoBehaviour
 
         float delta = Max - Current;
 		Current = Max;
-		HealthChangedEventArgs args = new (delta, this);
+		HealthChangedEventArgs args = new (delta, this, null);
 		HealthChanged?.Invoke(this, args);
 		HealthIncreased?.Invoke(this, args);
 		HealthFull?.Invoke();
@@ -65,14 +66,14 @@ public class Health : MonoBehaviour
         return delta;
 	}
 
-	public float Kill()
+	public float Kill(Transform hitter = null)
     {
 		if (IsDead)
 			return 0;
 
 		float delta = Current;
 		Current = 0;
-		HealthChangedEventArgs args = new (-delta, this);
+		HealthChangedEventArgs args = new (-delta, this, hitter);
 		HealthChanged?.Invoke(this, args);
 		HealthReduced?.Invoke(this, args);
 		HealthEnd?.Invoke();
@@ -117,7 +118,7 @@ public class Health : MonoBehaviour
 			}
 		}
 
-		HealthChangedEventArgs args = new (currentDelta, this);
+		HealthChangedEventArgs args = new (currentDelta, this, null);
 		HealthChanged?.Invoke(this, args);
 		MaxChanged?.Invoke(this, args);
 	}
