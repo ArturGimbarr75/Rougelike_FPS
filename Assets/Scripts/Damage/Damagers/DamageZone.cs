@@ -5,6 +5,7 @@ public class DamageZone : MonoBehaviour
 {
 	[SerializeField, Min(0)] private float _damagePerSecond = 1f;
 	[SerializeField] private DamageType _damageType;
+	[SerializeField] private Transform _hitter;
 
     private HashSet<GeneralDamageProvider> _damageProviders = new();
 
@@ -29,6 +30,6 @@ public class DamageZone : MonoBehaviour
 
 		Damage damage = new(_damagePerSecond * Time.deltaTime, _damageType);
 		foreach (var damageProvider in _damageProviders)
-			damageProvider.ApplyDamage(damage, null);
+			damageProvider.ApplyDamage(damage, _hitter);
 	}
 }
