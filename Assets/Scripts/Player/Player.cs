@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 {
 	public static Player Instance { get; private set; }
 
+	public bool Alive => !Health.IsDead;
+
 	public Vector3 LocalHead => Vector3.up * (CharacterController.height - Crouch.CameraOffset);
 	public Vector3 GlobalHead => LocalHead + transform.position;
 	public Vector3 LocalCenter => Vector3.up * (CharacterController.height / 2);

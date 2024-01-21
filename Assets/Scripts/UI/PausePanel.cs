@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PausePanel : MonoBehaviour
 {
@@ -14,13 +15,13 @@ public class PausePanel : MonoBehaviour
 
 	private void OnEnable()
     {
-		PauseSystem.Paused += ShowPanel;
+		PauseSystem.Paused += OnPaused;
 		PauseSystem.Unpaused += HidePanel;
 	}
 
 	private void OnDisable()
 	{
-		PauseSystem.Paused -= ShowPanel;
+		PauseSystem.Paused -= OnPaused;
 		PauseSystem.Unpaused -= HidePanel;
 	}
 
@@ -34,11 +35,22 @@ public class PausePanel : MonoBehaviour
 		_panel.SetActive(true);
 	}
 
+	private void OnPaused()
+	{
+		if (Player.Instance.Alive)
+			ShowPanel();
+	}
+
 	#region Buttons
 
 	public void OnResumeButtonClicked()
 	{
 		PauseSystem.Unpause();
+	}
+
+	public void OnRestartButtonClicked()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void OnSettingsButtonClicked()
@@ -48,7 +60,7 @@ public class PausePanel : MonoBehaviour
 
 	public void OnQuitButtonClicked()
 	{
-		Debug.Log("Quit button clicked"); // TODO: Back to main menu
+		SceneSwitcher.LoadMainMenu();
 	}
 
 	#endregion Buttons
