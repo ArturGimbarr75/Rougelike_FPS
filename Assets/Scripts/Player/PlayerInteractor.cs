@@ -9,6 +9,7 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField, Range(0.1f, 5f)] private float _interactionDistance = 2f;
 
     private IInteractable? _interactable;
+	private bool? _interactableActive;
     private IObjectWithInfo? _objectWithInfo;
 
 	private Transform _camera;
@@ -22,7 +23,7 @@ public class PlayerInteractor : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.E))
+		if (Input.GetKeyDown(KeyCode.E) && _interactable is { Active: true })
 			_interactable?.Interact();
 	}
 
@@ -45,9 +46,10 @@ public class PlayerInteractor : MonoBehaviour
 			ObjectWithInfoChanged?.Invoke(_objectWithInfo);
 		}
 
-		if (newInteractable != _interactable)
+		if (newInteractable != _interactable || _interactable?.Active != _interactableActive)
 		{
 			_interactable = newInteractable;
+			_interactableActive = _interactable?.Active;
 			InteractableChanged?.Invoke(_interactable);
 		}
     }

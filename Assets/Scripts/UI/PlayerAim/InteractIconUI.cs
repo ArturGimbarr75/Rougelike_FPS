@@ -3,7 +3,9 @@ using UnityEngine.UI;
 
 public class InteractIconUI : MonoBehaviour
 {
-	[SerializeField] private GameObject _interactIcon;
+	[SerializeField] private Image _interactIcon;
+	[SerializeField] private Color _activeColor = Color.white;
+	[SerializeField] private Color _inactiveColor = Color.gray;
 
 	[Space(3)]
 	[SerializeField] private PlayerInteractor _playerInteractor;
@@ -27,7 +29,8 @@ public class InteractIconUI : MonoBehaviour
 
 	private void UpdateUI(IInteractable? interactable = null)
 	{
-		_interactIcon.SetActive(interactable is not null);
+		_interactIcon.gameObject.SetActive(interactable is not null);
+		_interactIcon.color = interactable?.Active ?? false? _activeColor : _inactiveColor;
 	}
 
 #if UNITY_EDITOR
@@ -36,7 +39,13 @@ public class InteractIconUI : MonoBehaviour
 	private void SetParams()
 	{
 		_playerInteractor ??= GetComponentInParent<PlayerInteractor>();
-		_interactIcon ??= transform.Find("InteractIconImage").gameObject;
+		_interactIcon ??= transform.Find("InteractIconImage")?.GetComponent<Image>();
+	}
+
+	private void OnValidate()
+	{
+		if (_interactIcon is not null)
+			_interactIcon.color = _activeColor;
 	}
 
 #endif
