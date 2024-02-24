@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerInteractor : MonoBehaviour
 {
     public event Action<IObjectWithInfo?> ObjectWithInfoChanged;
+    public event Action<IInteractable?> InteractableChanged;
 
     [SerializeField, Range(0.1f, 5f)] private float _interactionDistance = 2f;
 
@@ -42,6 +43,12 @@ public class PlayerInteractor : MonoBehaviour
         {
 			_objectWithInfo = newObjectWithInfo;
 			ObjectWithInfoChanged?.Invoke(_objectWithInfo);
+		}
+
+		if (newInteractable != _interactable)
+		{
+			_interactable = newInteractable;
+			InteractableChanged?.Invoke(_interactable);
 		}
     }
 }
