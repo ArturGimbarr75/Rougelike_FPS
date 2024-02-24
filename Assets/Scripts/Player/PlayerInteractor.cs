@@ -10,6 +10,15 @@ public class PlayerInteractor : MonoBehaviour
     private IInteractable? _interactable;
     private IObjectWithInfo? _objectWithInfo;
 
+	private Transform _camera;
+	private LayerMask _playerLayerMask;
+
+	private void Start()
+	{
+		_camera = Player.Instance.Camera.transform;
+		_playerLayerMask = Player.Instance.PlayerLayerMask;
+	}
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.E))
@@ -18,10 +27,16 @@ public class PlayerInteractor : MonoBehaviour
 
 	private void FixedUpdate()
     {
-        Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _interactionDistance);
+        Physics.Raycast(_camera.position,
+						_camera.forward,
+						out RaycastHit hit,
+						_interactionDistance,
+						~_playerLayerMask, // cast all layers except player layer
+						QueryTriggerInteraction.Ignore);
 
 		IObjectWithInfo? newObjectWithInfo = hit.collider?.GetComponent<IObjectWithInfo>();
-        IInteractable? newInteractable = newObjectWithInfo as IInteractable;
+		IInteractable? newInteractable = (newObjectWithInfo as IInteractable)
+										 ?? hit.collider?.GetComponent<IInteractable>();
 
         if (newObjectWithInfo != _objectWithInfo)
         {
