@@ -16,4 +16,9 @@ public class DefaultInteractable : MonoBehaviour, IInteractable
 	{
 		Interact?.Invoke();
 	}
+
+	public void SetInteractableActive(bool active)
+	{
+		Active = active;
+	}
 }
