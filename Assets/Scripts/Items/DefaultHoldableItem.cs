@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DefaultHoldableItem : HoldableItem
 {
-    [SerializeField] private Behaviour[] _enableOnDropDisableOnPickup;
+    [SerializeField] private Behaviour[] _enableOnPickupDisableOnDrop;
 
     private Rigidbody _rigidbody;
     private Collider[] _colliders;
@@ -19,8 +19,8 @@ public class DefaultHoldableItem : HoldableItem
         foreach (var collider in _colliders)
             collider.enabled = true;
 
-        foreach (var component in _enableOnDropDisableOnPickup)
-            component.enabled = true;
+        foreach (var component in _enableOnPickupDisableOnDrop)
+            component.enabled = false;
     }
 
     public override void OnHide()
@@ -34,8 +34,8 @@ public class DefaultHoldableItem : HoldableItem
         foreach (var collider in _colliders)
             collider.enabled = false;
 
-        foreach (var component in _enableOnDropDisableOnPickup)
-            component.enabled = false;
+        foreach (var component in _enableOnPickupDisableOnDrop)
+            component.enabled = true;
     }
 
     public override void OnShow()
