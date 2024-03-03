@@ -18060,6 +18060,7 @@ MonoBehaviour:
   <View>k__BackingField: {fileID: 751898015}
   <Camera>k__BackingField: {fileID: 1717457817}
   <Interactor>k__BackingField: {fileID: 1197794547}
+  <ItemHolder>k__BackingField: {fileID: 269211322}
 --- !u!4 &1197794557
 Transform:
   m_ObjectHideFlags: 0
@@ -26006,6 +26007,7 @@ GameObject:
   - component: {fileID: 33012783288007608}
   - component: {fileID: 33012783288007609}
   - component: {fileID: 33012783288007610}
+  - component: {fileID: 33012783288007611}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -26065,6 +26067,7 @@ GameObject:
   - component: {fileID: 33775415669468793}
   - component: {fileID: 33775415669468794}
   - component: {fileID: 33775415669468795}
+  - component: {fileID: 33775415669468796}
   m_Layer: 0
   m_Name: FlashlightColor
   m_TagString: Untagged
@@ -26325,6 +26328,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _light: {fileID: 108038271741685935}
+--- !u!114 &33012783288007611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002703348228039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43f45da8cbe3f24f86b43cf76c6f2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Active>k__BackingField: 1
+  _item: {fileID: 33012783288007609}
 --- !u!33 &33775415669468790
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -26426,6 +26443,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _light: {fileID: 108490536400529722}
+--- !u!114 &33775415669468796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298583446595490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43f45da8cbe3f24f86b43cf76c6f2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Active>k__BackingField: 1
+  _item: {fileID: 33775415669468794}
 --- !u!108 &108038271741685935
 Light:
   m_ObjectHideFlags: 0
