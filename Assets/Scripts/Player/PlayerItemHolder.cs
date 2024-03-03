@@ -16,13 +16,20 @@ public class PlayerItemHolder : MonoBehaviour
     public HoldableItem? PreviousItem 
         => ItemsCount > 0 ? _items[(_currentItemIndex - 1 + ItemsCount) % ItemsCount] : null;
 
+    private Animation _animation;
     private List<HoldableItem> _items = new();
     private int _currentItemIndex = 0;
+    private Action? _callback;
 
     public HoldableItem this[int index] => _items[index];
 
     [SerializeField, Min(0)] private float _throwImpulse = 7f;
     [SerializeField, Min(0)] private float _throwTorque = 13f;
+
+    private void Awake()
+    {
+        _animation = GetComponent<Animation>();
+    }
 
     private void Start()
     {
@@ -48,18 +55,28 @@ public class PlayerItemHolder : MonoBehaviour
         }
     }
 
+    public void AnimationCallBack()
+    {
+        _callback?.Invoke();
+    }
+
     private void SwitchToNextItem()
     {
         if (_items.Count < 2)
             return;
 
-        CurrentItem.OnHide();
-        CurrentItem.gameObject.SetActive(false);
-        _currentItemIndex = (_currentItemIndex + 1) % _items.Count;
-        CurrentItem.gameObject.SetActive(true);
-        CurrentItem.OnShow();
+        _animation.Play();
 
-        OnItemChanged?.Invoke(CurrentItem);
+        _callback = () =>
+        {
+            CurrentItem.OnHide();
+            CurrentItem.gameObject.SetActive(false);
+            _currentItemIndex = (_currentItemIndex + 1) % _items.Count;
+            CurrentItem.gameObject.SetActive(true);
+            CurrentItem.OnShow();
+
+            OnItemChanged?.Invoke(CurrentItem);
+        };    
     }
 
     private void SwitchToPreviousItem()
@@ -67,13 +84,18 @@ public class PlayerItemHolder : MonoBehaviour
         if (_items.Count < 2)
             return;
 
-        CurrentItem.OnHide();
-        CurrentItem.gameObject.SetActive(false);
-        _currentItemIndex = (_currentItemIndex + _items.Count - 1) % _items.Count;
-        CurrentItem.gameObject.SetActive(true);
-        CurrentItem.OnShow();
+        _animation.Play();
 
-        OnItemChanged?.Invoke(CurrentItem);
+        _callback = () =>
+        {
+            CurrentItem.OnHide();
+            CurrentItem.gameObject.SetActive(false);
+            _currentItemIndex = (_currentItemIndex + _items.Count - 1) % _items.Count;
+            CurrentItem.gameObject.SetActive(true);
+            CurrentItem.OnShow();
+
+            OnItemChanged?.Invoke(CurrentItem);
+        };
     }
 
     public void AddItem(HoldableItem item)
@@ -92,9 +114,14 @@ public class PlayerItemHolder : MonoBehaviour
 
         if (_items.Count == 1)
         {
-            _currentItemIndex = 0;
-            CurrentItem.gameObject.SetActive(true);
-            CurrentItem.OnShow();
+            _animation.Play();
+            _callback = () =>
+            {
+                _currentItemIndex = 0;
+                CurrentItem.gameObject.SetActive(true);
+                CurrentItem.OnShow();
+                OnItemChanged?.Invoke(CurrentItem);
+            };
         }
     }
 
@@ -120,10 +147,15 @@ public class PlayerItemHolder : MonoBehaviour
             }
             else
             {
-                _currentItemIndex %= _items.Count;
-                CurrentItem.gameObject.SetActive(true);
-                CurrentItem.OnShow();
-                OnItemChanged?.Invoke(CurrentItem);
+                _animation.Play();
+
+                _callback = () =>
+                {
+                    _currentItemIndex %= _items.Count;
+                    CurrentItem.gameObject.SetActive(true);
+                    CurrentItem.OnShow();
+                    OnItemChanged?.Invoke(CurrentItem);
+                };
             }
 
             OnItemRemoved?.Invoke(item);
