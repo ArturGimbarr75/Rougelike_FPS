@@ -25,7 +25,7 @@ public class DefaultHoldableItem : HoldableItem
 
     public override void OnHide()
     {
-        gameObject.SetActive(false);
+
     }
 
     public override void OnPickup()
@@ -40,7 +40,6 @@ public class DefaultHoldableItem : HoldableItem
 
     public override void OnShow()
     {
-        gameObject.SetActive(true);
         transform.localPosition = HoldLocalPosition;
         transform.localRotation = HoldLocalRotation;
     }
