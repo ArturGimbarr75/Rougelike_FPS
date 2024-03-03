@@ -13,4 +13,15 @@ public abstract class HoldableItem : MonoBehaviour
     public abstract void OnDrop();
     public abstract void OnShow();
     public abstract void OnHide();
+
+#if UNITY_EDITOR
+
+    [ContextMenu(nameof(SetCurrentPositionAsHoldPosition))]
+    private void SetCurrentPositionAsHoldPosition()
+    {
+        HoldLocalPosition = transform.localPosition;
+        HoldLocalRotation = transform.localRotation;
+    }
+
+#endif
 }
