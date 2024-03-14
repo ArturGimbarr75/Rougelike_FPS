@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 	[field:SerializeField] public PlayerView View { get; private set; }
 	[field:SerializeField] public Camera Camera { get; private set; }
 	[field:SerializeField] public PlayerInteractor Interactor { get; private set; }
+	[field:SerializeField] public PlayerItemHolder ItemHolder { get; private set; }
 
 	private void Awake()
 	{
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
 		View ??= GetComponentInChildren<PlayerView>();
 		Camera ??= View.GetComponentInChildren<Camera>();
 		Interactor ??= GetComponent<PlayerInteractor>();
+		ItemHolder ??= GetComponentInChildren<PlayerItemHolder>();
 	}
 
 #endif
