@@ -7,6 +7,8 @@ public class PlayerItemHolder : MonoBehaviour
     public event Action<HoldableItem> OnItemAdded;
     public event Action<HoldableItem> OnItemRemoved;
     public event Action<HoldableItem?> OnItemChanged;
+    public event Action OnItemChangingToNext;
+    public event Action OnItemChangingToPrevious;
 
     public int ItemsCount => _items.Count;
     public HoldableItem? CurrentItem
@@ -67,6 +69,7 @@ public class PlayerItemHolder : MonoBehaviour
 
         _animation.Play();
 
+        OnItemChangingToNext?.Invoke();
         _callback = () =>
         {
             CurrentItem.OnHide();
@@ -86,6 +89,7 @@ public class PlayerItemHolder : MonoBehaviour
 
         _animation.Play();
 
+        OnItemChangingToPrevious?.Invoke();
         _callback = () =>
         {
             CurrentItem.OnHide();
