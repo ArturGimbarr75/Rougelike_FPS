@@ -13,8 +13,7 @@ public class LerpRotation : MonoBehaviour
 
     public void SetLerpValue(float value)
     {
-		_lerpValue = value;
-		Quaternion rotation = Quaternion.Slerp(_startRotation, _targetRotation, _lerpValue);
+		Quaternion rotation = Quaternion.Slerp(_startRotation, _targetRotation, value);
 
 		if (_localSpace)
 			transform.localRotation = rotation;

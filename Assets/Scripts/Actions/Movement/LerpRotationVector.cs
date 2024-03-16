@@ -13,8 +13,7 @@ public class LerpRotationVector : MonoBehaviour
 
     public void SetLerpValue(float value)
     {
-		_lerpValue = value;
-		Vector3 vector = Vector3.LerpUnclamped(_startRotation, _targetRotation, _lerpValue);
+		Vector3 vector = Vector3.LerpUnclamped(_startRotation, _targetRotation, value);
 		Quaternion rotation = Quaternion.Euler(vector);
 
 		if (_localSpace)
