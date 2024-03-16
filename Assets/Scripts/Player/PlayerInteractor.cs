@@ -84,6 +84,7 @@ public class PlayerInteractor : MonoBehaviour
 				_longInteractable = null;
 				_longInteractableActive = false;
 				_isLongInteractableSaved = false;
+				InteractableChanged?.Invoke(null);
 				LongInteractableChanged?.Invoke(null);
 			}
 
