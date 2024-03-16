@@ -13,8 +13,7 @@ public class LerpMovement : MonoBehaviour
 
     public void SetLerpValue(float value)
     {
-		_lerpValue = value;
-		Vector3 position = Vector3.Lerp(_startPosition, _targetPosition, _lerpValue);
+		Vector3 position = Vector3.Lerp(_startPosition, _targetPosition, value);
 
 		if (_localSpace)
             transform.localPosition = position;
