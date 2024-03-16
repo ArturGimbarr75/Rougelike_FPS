@@ -45,6 +45,7 @@ public class LerpMovement : MonoBehaviour
 	private void SetCurretPositionAsStart()
 	{
 		_lerpValue = 0;
+		_previousLerpValue = 0;
 		_startPosition = _localSpace ? transform.localPosition : transform.position;
 	}
 
@@ -52,6 +53,7 @@ public class LerpMovement : MonoBehaviour
 	private void SetCurretPositionAsTarget()
 	{
 		_lerpValue = 1;
+		_previousLerpValue = 1;
 		_targetPosition = _localSpace ? transform.localPosition : transform.position;
 	}
 

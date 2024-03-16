@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class LerpRotation : MonoBehaviour
+public class LerpRotationVector : MonoBehaviour
 {
     [SerializeField] private bool _localSpace;
-    [SerializeField] private Quaternion _startRotation;
-    [SerializeField] private Quaternion _targetRotation;
+    [SerializeField] private Vector3 _startRotation;
+    [SerializeField] private Vector3 _targetRotation;
 
 #if UNITY_EDITOR
     [SerializeField, Range(0, 1)] private float _lerpValue;
-    private float _previousLerpValue;
+	private float _previousLerpValue;
 #endif
 
     public void SetLerpValue(float value)
     {
 		_lerpValue = value;
-		Quaternion rotation = Quaternion.Slerp(_startRotation, _targetRotation, _lerpValue);
+		Vector3 vector = Vector3.LerpUnclamped(_startRotation, _targetRotation, _lerpValue);
+		Quaternion rotation = Quaternion.Euler(vector);
 
 		if (_localSpace)
 			transform.localRotation = rotation;
@@ -26,11 +27,11 @@ public class LerpRotation : MonoBehaviour
 
 	private void OnValidate()
 	{
-		if (_lerpValue != _previousLerpValue)
-		{
-			SetLerpValue(_lerpValue);
-			_previousLerpValue = _lerpValue;
-		}
+		if (_previousLerpValue == _lerpValue)
+			return;
+
+		_previousLerpValue = _lerpValue;
+        SetLerpValue(_lerpValue);
 	}
 
 	[ContextMenu("Set Current Rotation As Start")]
@@ -38,7 +39,9 @@ public class LerpRotation : MonoBehaviour
 	{
 		_lerpValue = 0;
 		_previousLerpValue = 0;
-		_startRotation = _localSpace ? transform.localRotation : transform.rotation;
+		_startRotation = _localSpace
+			? transform.localRotation.eulerAngles
+			: transform.rotation.eulerAngles;
 	}
 
 	[ContextMenu("Set Current Rotation As Target")]
@@ -46,7 +49,9 @@ public class LerpRotation : MonoBehaviour
 	{
 		_lerpValue = 1;
 		_previousLerpValue = 1;
-		_targetRotation = _localSpace ? transform.localRotation : transform.rotation;
+		_targetRotation = _localSpace
+			? transform.localRotation.eulerAngles
+			: transform.rotation.eulerAngles;
 	}
 
 #endif
